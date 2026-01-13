@@ -7,17 +7,17 @@
     <div class="form-page-container">
         <div class="form-page-header">
             <h2>Verify Reset Code</h2>
-            <p>We have sent a 6-digit code to your email. Please enter it below.</p>
+            <p>Enter the 6-digit code sent to your email</p>
         </div>
 
         {% if error %}
-            <p style="color: red; text-align: center; font-weight: bold;">{{ error }}</p>
+            <p style="color: #ef4444; text-align: center; font-weight: 700; padding: 15px; background: #fee2e2; border-radius: 12px; margin-bottom: 20px;">{{ error }}</p>
         {% endif %}
 
         <div class="modern-form-card">
             <form method="POST" action="{{ url_for('auth.verify_code') }}">
                 <div class="modern-form-group">
-                    <label for="reset_code" style="font-size:x-large;">Reset Code</label>
+                    <label for="reset_code"  style="font-size:x-large;">Reset Code</label>
                     <input type="text"
                            id="reset_code"
                            name="reset_code"
@@ -25,15 +25,17 @@
                            maxlength="6"
                            minlength="6"
                            autocomplete="off"
+                           style="text-align: center; font-size: 1.5rem; font-weight: 700; letter-spacing: 8px;"
                            required
                            autofocus>
+                    <p class="help-text"  style="font-size:large;">Code is case-sensitive and valid for 10 minutes</p>
                 </div>
 
                 <button type="submit" class="modern-submit-btn">Verify Code</button>
             </form>
 
-            <p style="text-align: center; margin-top: 1rem;">
-                <a href="{{ url_for('auth.forgot_password') }}">Request new code</a>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="{{ url_for('auth.forgot_password') }}" style="color: #667eea; font-weight: 600;">Request new code</a>
             </p>
         </div>
     </div>

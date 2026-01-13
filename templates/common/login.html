@@ -2,6 +2,8 @@
 
 {% block title %}Login - ExamPro{% endblock %}
 
+
+
 {% block content %}
 <section>
     <div class="form-page-container">
@@ -11,7 +13,7 @@
         </div>
 
         {% if error %}
-            <p style="color: red; text-align: center; font-weight: bold;">{{ error }}</p>
+            <p style="color: #ef4444; text-align: center; font-weight: 700; padding: 15px; background: #fee2e2; border-radius: 12px; margin-bottom: 20px;">{{ error }}</p>
         {% endif %}
 
         <div class="modern-form-card">

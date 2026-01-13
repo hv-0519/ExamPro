@@ -2,65 +2,415 @@
 
 {% block title %}Register - ExamPro{% endblock %}
 
+
+
 {% block content %}
 <section>
-    <div class="form-page-container" style="max-width: 700px;">
-        <div class="form-page-header">
+    <div class="registration-wrapper">
+        <div class="reg-header">
             <h2>Create Your Account</h2>
-            <p>Join us and start your journey today</p>
+            <p>Join ExamPro and start your learning journey today</p>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="reg-progress">
+            <div class="progress-step active" data-step="1">
+                <div class="progress-circle">1</div>
+                <div class="progress-label">Personal Info</div>
+            </div>
+            <div class="progress-step" data-step="2">
+                <div class="progress-circle">2</div>
+                <div class="progress-label">Contact Details</div>
+            </div>
+            <div class="progress-step" data-step="3">
+                <div class="progress-circle">3</div>
+                <div class="progress-label">Additional Info</div>
+            </div>
+            <div class="progress-step" data-step="4">
+                <div class="progress-circle">4</div>
+                <div class="progress-label">Review & Submit</div>
+            </div>
         </div>
 
         <div class="modern-form-card">
-            <form method="POST" action="{{ url_for('auth.register') }}" enctype="multipart/form-data">
-                <div class="form-grid-2col">
-                    <div class="modern-form-group">
-                        <label for="fname" style="font-size:x-large;">First Name</label>
-                        <input type="text" id="fname" name="fname" placeholder="Enter First Name" required>
+            <form method="POST" action="{{ url_for('auth.register') }}" enctype="multipart/form-data"
+                id="registrationForm">
+
+                <!-- Step 1: Personal Information -->
+                <div class="form-step active" data-step="1">
+                    <div class="step-title">
+                        <div class="step-icon">👤</div>
+                        <span>Personal Information</span>
                     </div>
 
-                    <div class="modern-form-group">
-                        <label for="lname" style="font-size:x-large;">Last Name</label>
-                        <input type="text" id="lname" name="lname" placeholder="Enter Last Name" required>
-                    </div>
+                    <div class="reg-form-grid">
+                        <div class="reg-form-group">
+                            <label for="fname" style="font-size: x-large;">First Name <span
+                                    class="required-mark">*</span></label>
+                            <input type="text" id="fname" name="fname" placeholder="Enter first name" required>
+                            <span class="input-icon"></span>
+                            <span class="error-message">Please enter your first name</span>
+                        </div>
 
-                    <div class="modern-form-group">
-                        <label for="email" style="font-size:x-large;">Email</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                    </div>
+                        <div class="reg-form-group">
+                            <label for="lname" style="font-size: x-large;">Last Name <span
+                                    class="required-mark">*</span></label>
+                            <input type="text" id="lname" name="lname" placeholder="Enter last name" required>
+                            <span class="input-icon"></span>
+                            <span class="error-message">Please enter your last name</span>
+                        </div>
 
-                    <div class="modern-form-group">
-                        <label for="contact_no" style="font-size:x-large;">Contact No</label>
-                        <input type="text" id="contact_no" name="contact_no" placeholder="+1234567890" required>
-                    </div>
+                        <div class="reg-form-group full-width">
+                            <label style="font-size: x-large;">Gender <span class="required-mark">*</span></label>
+                            <div class="reg-radio-group">
+                                <label>
+                                    <input type="radio" name="gender" value="male" required>
+                                    <span>👨 Male</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" value="female">
+                                    <span>👩 Female</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" value="other">
+                                    <span>⚧️ Other</span>
+                                </label>
+                            </div>
+                        </div>
 
-                    <div class="modern-form-group" style="grid-column: 1 / -1;">
-                        <label style="font-size:x-large;">Gender</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="gender" value="male" required> Male</label>
-                            <label><input type="radio" name="gender" value="female"> Female</label>
-                            <label><input type="radio" name="gender" value="other"> Other</label>
+                        <div class="reg-form-group">
+                            <label for="date_of_birth" style="font-size: x-large;">Date of Birth <span
+                                    class="required-mark">*</span></label>
+                            <input type="date" id="date_of_birth" name="date_of_birth" required>
+                            <span class="help-text" style="font-size:medium;">You must be at least 13 years old</span>
                         </div>
                     </div>
 
-                    <div class="modern-form-group">
-                        <label for="date_of_birth" style="font-size:x-large;">Date of Birth</label>
-                        <input type="date" id="date_of_birth" name="date_of_birth" required>
-                    </div>
-
-                    <div class="modern-form-group" style="grid-column: 1 / -1;">
-                        <label for="address" style="font-size:x-large;">Address</label>
-                        <textarea id="address" name="address" placeholder="Enter your full address"></textarea>
-                    </div>
-
-                    <div class="modern-form-group" style="grid-column: 1 / -1;">
-                        <label for="photo" style="font-size:x-large;">Photo</label>
-                        <input type="file" id="photo" name="photo" accept="image/*">
+                    <div class="form-navigation">
+                        <button type="button" class="btn-nav btn-next" onclick="nextStep()">
+                            Next <span>→</span>
+                        </button>
                     </div>
                 </div>
 
-                <button type="submit" class="modern-submit-btn">Register Now</button>
+                <!-- Step 2: Contact Details -->
+                <div class="form-step" data-step="2">
+                    <div class="step-title">
+                        <div class="step-icon">📧</div>
+                        <span>Contact Details</span>
+                    </div>
+
+                    <div class="reg-form-grid">
+                        <div class="reg-form-group full-width">
+                            <label for="email" style="font-size: x-large;">Email Address <span
+                                    class="required-mark">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                            <span class="input-icon"></span>
+                            <span class="error-message">Please enter a valid email address</span>
+                        </div>
+
+                        <div class="reg-form-group">
+                            <label for="contact_no" style="font-size: x-large;">Contact Number <span
+                                    class="required-mark">*</span></label>
+                            <input type="tel" id="contact_no" name="contact_no" placeholder="+1 (555) 000-0000"
+                                required>
+                            <span class="input-icon"></span>
+                        </div>
+
+                        <div class="reg-form-group full-width">
+                            <label for="address" style="font-size: x-large;">Address</label>
+                            <textarea id="address" name="address" placeholder="Enter your full address"
+                                rows="4"></textarea>
+                            <span class="help-text" style="font-size:medium;">Street address, city, state, ZIP
+                                code</span>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn-nav btn-prev" onclick="prevStep()">
+                            <span>←</span> Previous
+                        </button>
+                        <button type="button" class="btn-nav btn-next" onclick="nextStep()">
+                            Next <span>→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Additional Information -->
+                <div class="form-step" data-step="3">
+                    <div class="step-title">
+                        <div class="step-icon">📸</div>
+                        <span>Additional Information</span>
+                    </div>
+
+                    <div class="reg-form-group full-width">
+                        <label style="font-size: x-large;">Profile Photo (Optional)</label>
+                        <div class="file-upload-wrapper">
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <div class="upload-icon">📷</div>
+                                <p><strong>Click to upload</strong> or drag and drop</p>
+                                <p style="font-size: 0.85rem; color: #6b7280;">PNG, JPG or JPEG (MAX. 5MB)</p>
+                                <input type="file" id="photo" name="photo" accept="image/*">
+                            </div>
+                            <div class="file-preview" id="filePreview">
+                                <img id="previewImage" src="" alt="Preview">
+                                <div class="file-info">
+                                    <div class="file-name" id="fileName"></div>
+                                    <div class="file-size" id="fileSize"></div>
+                                </div>
+                                <button type="button" class="remove-file" onclick="removeFile()">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn-nav btn-prev" onclick="prevStep()">
+                            <span>←</span> Previous
+                        </button>
+                        <button type="button" class="btn-nav btn-next" onclick="nextStep()">
+                            Next <span>→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Review & Submit -->
+                <div class="form-step" data-step="4">
+                    <div class="step-title">
+                        <div class="step-icon">✅</div>
+                        <span>Review & Submit</span>
+                    </div>
+
+                    <div id="reviewContent"
+                        style="background: #f9fafb; padding: 30px; border-radius: 16px; margin-bottom: 30px;">
+                        <!-- Review content will be populated by JavaScript -->
+                    </div>
+
+                    <div class="terms-group">
+                        <label style="font-size: x-large;">
+                            <input type="checkbox" id="terms" required>
+                            <span class="terms-text">
+                                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                                I understand that my information will be processed according to these terms.
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn-nav btn-prev" onclick="prevStep()">
+                            <span>←</span> Previous
+                        </button>
+                        <button type="submit" class="btn-nav btn-submit">
+                            Create Account <span>✓</span>
+                        </button>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>
 </section>
+
+<script>
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    // Form validation
+    function validateStep(step) {
+        const currentStepElement = document.querySelector(`.form-step[data-step="${step}"]`);
+        const inputs = currentStepElement.querySelectorAll('input[required], textarea[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            const formGroup = input.closest('.reg-form-group');
+            const errorMsg = formGroup?.querySelector('.error-message');
+            const icon = formGroup?.querySelector('.input-icon');
+
+            if (!input.value.trim() || (input.type === 'radio' && !currentStepElement.querySelector('input[name="' + input.name + '"]:checked'))) {
+                isValid = false;
+                if (input.type !== 'radio') {
+                    input.classList.add('invalid');
+                    input.classList.remove('valid');
+                    if (icon) icon.textContent = '✗';
+                    if (icon) icon.classList.add('invalid');
+                    if (errorMsg) errorMsg.classList.add('show');
+                }
+            } else {
+                if (input.type !== 'radio' && input.type !== 'date') {
+                    input.classList.add('valid');
+                    input.classList.remove('invalid');
+                    if (icon) icon.textContent = '✓';
+                    if (icon) icon.classList.add('valid');
+                    if (errorMsg) errorMsg.classList.remove('show');
+                }
+            }
+        });
+
+        return isValid;
+    }
+
+    // Email validation
+    document.getElementById('email')?.addEventListener('blur', function () {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const formGroup = this.closest('.reg-form-group');
+        const icon = formGroup.querySelector('.input-icon');
+        const errorMsg = formGroup.querySelector('.error-message');
+
+        if (!emailPattern.test(this.value)) {
+            this.classList.add('invalid');
+            this.classList.remove('valid');
+            if (icon) icon.textContent = '✗';
+            if (errorMsg) errorMsg.classList.add('show');
+        } else {
+            this.classList.add('valid');
+            this.classList.remove('invalid');
+            if (icon) icon.textContent = '✓';
+            if (errorMsg) errorMsg.classList.remove('show');
+        }
+    });
+
+    // File upload
+    const fileInput = document.getElementById('photo');
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const filePreview = document.getElementById('filePreview');
+
+    fileUploadArea?.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.add('dragover');
+    });
+
+    fileUploadArea?.addEventListener('dragleave', () => {
+        fileUploadArea.classList.remove('dragover');
+    });
+
+    fileUploadArea?.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            handleFileSelect();
+        }
+    });
+
+    fileInput?.addEventListener('change', handleFileSelect);
+
+    function handleFileSelect() {
+        const file = fileInput.files[0];
+        if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('previewImage').src = e.target.result;
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('fileSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+                filePreview.classList.add('show');
+                fileUploadArea.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function removeFile() {
+        fileInput.value = '';
+        filePreview.classList.remove('show');
+        fileUploadArea.style.display = 'block';
+    }
+
+    // Navigation
+    function nextStep() {
+        if (!validateStep(currentStep)) {
+            return;
+        }
+
+        if (currentStep < totalSteps) {
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('completed');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+
+            currentStep++;
+
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('active');
+
+            if (currentStep === totalSteps) {
+                populateReview();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function prevStep() {
+        if (currentStep > 1) {
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+
+            currentStep--;
+
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('completed');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function populateReview() {
+        const reviewContent = document.getElementById('reviewContent');
+        const formData = new FormData(document.getElementById('registrationForm'));
+
+        let html = '<h3 style="margin-bottom: 20px; color: #1f2937;">Please review your information</h3>';
+        html += '<div style="display: grid; gap: 15px;">';
+
+        const fields = [
+            { label: 'First Name', name: 'fname' },
+            { label: 'Last Name', name: 'lname' },
+            { label: 'Gender', name: 'gender' },
+            { label: 'Date of Birth', name: 'date_of_birth' },
+            { label: 'Email', name: 'email' },
+            { label: 'Contact Number', name: 'contact_no' },
+            { label: 'Address', name: 'address' }
+        ];
+
+        fields.forEach(field => {
+            const value = formData.get(field.name);
+            if (value) {
+                html += `
+                <div style="display: flex; justify-content: space-between; padding: 12px; background: white; border-radius: 8px;">
+                    <strong style="color: #6b7280;">${field.label}:</strong>
+                    <span style="color: #1f2937;">${value}</span>
+                </div>
+            `;
+            }
+        });
+
+        html += '</div>';
+        reviewContent.innerHTML = html;
+    }
+
+    // Real-time input validation
+    document.querySelectorAll('.reg-form-group input, .reg-form-group textarea').forEach(input => {
+        input.addEventListener('input', function () {
+            if (this.value.trim()) {
+                this.classList.remove('invalid');
+                const errorMsg = this.closest('.reg-form-group')?.querySelector('.error-message');
+                if (errorMsg) errorMsg.classList.remove('show');
+            }
+        });
+    });
+
+    // Form submission
+    document.getElementById('registrationForm')?.addEventListener('submit', function (e) {
+        if (!document.getElementById('terms').checked) {
+            e.preventDefault();
+            alert('Please accept the terms and conditions to continue.');
+            return false;
+        }
+    });
+</script>
+
 {% endblock %}
