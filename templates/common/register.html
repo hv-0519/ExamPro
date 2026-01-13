@@ -14,27 +14,27 @@
             <form method="POST" action="{{ url_for('auth.register') }}" enctype="multipart/form-data">
                 <div class="form-grid-2col">
                     <div class="modern-form-group">
-                        <label for="fname">First Name</label>
+                        <label for="fname" style="font-size:x-large;">First Name</label>
                         <input type="text" id="fname" name="fname" placeholder="Enter First Name" required>
                     </div>
 
                     <div class="modern-form-group">
-                        <label for="lname">Last Name</label>
+                        <label for="lname" style="font-size:x-large;">Last Name</label>
                         <input type="text" id="lname" name="lname" placeholder="Enter Last Name" required>
                     </div>
 
                     <div class="modern-form-group">
-                        <label for="email">Email</label>
+                        <label for="email" style="font-size:x-large;">Email</label>
                         <input type="email" id="email" name="email" placeholder="your@email.com" required>
                     </div>
 
                     <div class="modern-form-group">
-                        <label for="contact_no">Contact No</label>
+                        <label for="contact_no" style="font-size:x-large;">Contact No</label>
                         <input type="text" id="contact_no" name="contact_no" placeholder="+1234567890" required>
                     </div>
 
                     <div class="modern-form-group" style="grid-column: 1 / -1;">
-                        <label>Gender</label>
+                        <label style="font-size:x-large;">Gender</label>
                         <div class="radio-group">
                             <label><input type="radio" name="gender" value="male" required> Male</label>
                             <label><input type="radio" name="gender" value="female"> Female</label>
@@ -43,17 +43,17 @@
                     </div>
 
                     <div class="modern-form-group">
-                        <label for="date_of_birth">Date of Birth</label>
+                        <label for="date_of_birth" style="font-size:x-large;">Date of Birth</label>
                         <input type="date" id="date_of_birth" name="date_of_birth" required>
                     </div>
 
                     <div class="modern-form-group" style="grid-column: 1 / -1;">
-                        <label for="address">Address</label>
+                        <label for="address" style="font-size:x-large;">Address</label>
                         <textarea id="address" name="address" placeholder="Enter your full address"></textarea>
                     </div>
 
                     <div class="modern-form-group" style="grid-column: 1 / -1;">
-                        <label for="photo">Photo</label>
+                        <label for="photo" style="font-size:x-large;">Photo</label>
                         <input type="file" id="photo" name="photo" accept="image/*">
                     </div>
                 </div>
