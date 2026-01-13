@@ -1,12 +1,13 @@
 from flask import Blueprint, url_for, render_template, request, redirect
 import sqlite3
+import io
+import csv  # ✅ REQUIRED
 
 from utils.helpers import (
     get_admin_data,
     number_to_emoji,
     user_exists,
 )
-
 
 admin_bp = Blueprint("admin", __name__, url_prefix="")
 
@@ -172,72 +173,92 @@ def behavior_logs():
 @admin_bp.route("/exams/<int:exam_id>/upload_csv", methods=["GET", "POST"])
 def upload_csv(exam_id):
     username = request.args.get("username")
-    import sqlite3, csv
 
-    conn = sqlite3.connect("database/exam.db")
-    cursor = conn.cursor()
+    def get_connection():
+        return sqlite3.connect("database/exam.db", timeout=10)
 
-    # 1. Get Exam Title
-    cursor.execute("SELECT title FROM exams WHERE exam_id = ?", (exam_id,))
-    exam = cursor.fetchone()
-    title = exam[0] if exam else "Unknown Exam"
+    conn = None
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    # ---------------- POST Logic ----------------
-    if request.method == "POST":
-        file = request.files.get("csv_file")
-        
-        if not file:
-            conn.close()
-            return redirect(url_for("admin.upload_csv", exam_id=exam_id, username=username, status="error", msg="No file selected"))
+        # exam title
+        cursor.execute("SELECT title FROM exams WHERE exam_id = ?", (exam_id,))
+        exam = cursor.fetchone()
+        title = exam[0] if exam else "Unknown Exam"
 
-        try:
-            stream = file.stream.read().decode("utf-8").splitlines()
+        if request.method == "POST":
+            file = request.files.get("csv_file")
+            if not file:
+                return redirect(
+                    url_for(
+                        "admin.upload_csv",
+                        exam_id=exam_id,
+                        username=username,
+                        status="error",
+                        msg="No file selected",
+                    )
+                )
+
+            stream = io.StringIO(file.stream.read().decode("utf-8"))
             reader = csv.DictReader(stream)
 
             for row in reader:
-                # SIMPLE DUPLICATE CHECK: Skip if question text already exists for this exam
-                cursor.execute(
-                    "SELECT 1 FROM questions WHERE exam_id = ? AND question_text = ?", 
-                    (exam_id, row["question_text"])
-                )
-                if cursor.fetchone():
-                    continue 
-
                 cursor.execute(
                     """
-                    INSERT INTO questions 
-                    (exam_id, question_text, option_a, option_b, option_c, option_d, 
-                     correct_option, wrong_answer_explanation, marks)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    """,
+    INSERT OR IGNORE INTO questions
+    (exam_id, question_text, option_a, option_b, option_c, option_d,
+     correct_option, wrong_answer_explanation, marks)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """,
                     (
                         exam_id,
-                        row["question_text"],
-                        row["option_a"],
-                        row["option_b"],
-                        row["option_c"],
-                        row["option_d"],
-                        row["correct_option"],
-                        row.get("wrong_answer_explanation"),
-                        int(row["marks"]),
+                        row["question_text"].strip(),
+                        row["option_a"].strip(),
+                        row["option_b"].strip(),
+                        row["option_c"].strip(),
+                        row["option_d"].strip(),
+                        row["correct_option"].strip().upper(),
+                        row.get("wrong_answer_explanation", "").strip(),
+                        int(row.get("marks", 1)),
                     ),
                 )
-            
+
             conn.commit()
-            conn.close()
-            return redirect(url_for("admin.upload_csv", exam_id=exam_id, username=username, status="success"))
 
-        except Exception as e:
+            return redirect(
+                url_for(
+                    "admin.upload_csv",
+                    exam_id=exam_id,
+                    username=username,
+                    status="success",
+                )
+            )
+
+    except Exception as e:
+        if conn:
             conn.rollback()
-            conn.close()
-            # Return a redirect even on error so the view function always returns something
-            return redirect(url_for("admin.upload_csv", exam_id=exam_id, username=username, status="error", msg=str(e)))
+        return redirect(
+            url_for(
+                "admin.upload_csv",
+                exam_id=exam_id,
+                username=username,
+                status="error",
+                msg=str(e),
+            )
+        )
 
-    # ---------------- GET Logic ----------------
+    finally:
+        if conn:
+            conn.close()
+
+    # ✅ GET — FETCH QUESTIONS
+    conn = get_connection()
+    cursor = conn.cursor()
     cursor.execute(
         """
-        SELECT question_text, option_a, option_b, option_c, option_d, 
-               correct_option, wrong_answer_explanation, marks 
+        SELECT question_text, option_a, option_b, option_c, option_d,
+               correct_option, marks
         FROM questions WHERE exam_id = ?
         """,
         (exam_id,),
@@ -245,7 +266,6 @@ def upload_csv(exam_id):
     questions = cursor.fetchall()
     conn.close()
 
-    # This is the return for the GET request
     return render_template(
         "admin/upload_csv.html",
         username=username,
@@ -253,8 +273,9 @@ def upload_csv(exam_id):
         title=title,
         questions=questions,
         status=request.args.get("status"),
-        error_msg=request.args.get("msg")
+        msg=request.args.get("msg"),
     )
+
 
 @admin_bp.route("/exams/add", methods=["GET", "POST"])
 def add_exams():
@@ -283,6 +304,6 @@ def add_exams():
         conn.commit()
         conn.close()
 
-        return redirect(url_for("admin.exams", exam_id=exam_id, username=username))
+        return redirect(url_for("admin.add_exams", exam_id=exam_id, username=username))
 
     return render_template("admin/add_exams.html", username=username)

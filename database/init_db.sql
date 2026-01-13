@@ -160,3 +160,6 @@ ON behavior_logs(event_type);
 
 CREATE INDEX idx_risk_attempt
 ON risk_analysis(attempt_id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uq_exam_question
+ON questions (exam_id, question_text);
