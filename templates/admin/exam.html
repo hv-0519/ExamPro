@@ -1,0 +1,22 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block content %}
+<h2>{{ exam[1] }}</h2>
+
+<ul>
+  <li>Duration: {{ exam[2] }} minutes</li>
+  <li>Total Marks: {{ exam[3] }}</li>
+  <li>Max Attempts: {{ exam[4] }}</li>
+  <li>Created At: {{ exam[5] }}</li>
+</ul>
+
+
+<a href="{{ url_for('admin.upload_csv', username=username, exam_id=exam[0]) }}">
+  Add Questions
+</a>
+
+
+
+<a href="{{ url_for('admin.admin_exams', username=username) }}">Back</a>
+
+{% endblock %}

@@ -36,8 +36,8 @@
     <section class="cta-section">
         <h2 class="cta-title">Ready to Get Started?</h2>
         <div class="cta-buttons">
-            <a href="{{ url_for('register') }}" class="btn btn-register">Create Free Account</a>
-            <a href="{{ url_for('login') }}" class="btn btn-register">Login to Dashboard</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-register">Create Free Account</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-register">Login to Dashboard</a>
         </div>
     </section>
 {% endblock %}

@@ -15,7 +15,7 @@
         {% endif %}
 
         <div class="modern-form-card">
-            <form method="POST" action="{{ url_for('verify_code') }}">
+            <form method="POST" action="{{ url_for('auth.verify_code') }}">
                 <div class="modern-form-group">
                     <label for="reset_code">Reset Code</label>
                     <input type="text"
@@ -33,7 +33,7 @@
             </form>
 
             <p style="text-align: center; margin-top: 1rem;">
-                <a href="{{ url_for('forgot_password') }}">Request new code</a>
+                <a href="{{ url_for('auth.forgot_password') }}">Request new code</a>
             </p>
         </div>
     </div>

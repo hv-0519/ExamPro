@@ -20,7 +20,38 @@
         <!-- Close Button -->
 
         <nav class="sidebar-nav">
-            {% block sidebar_links %}{% endblock %}
+            {% block sidebar_links %}
+            <a href="{{ url_for('admin.admin_dashboard', username=username) }}" class="sidebar-link">
+                <span class="link-icon">📊</span>
+                <span class="link-text">Dashboard</span>
+            </a>
+            <!--To View All Exams --><a href="{{ url_for('admin.admin_exams', username=username ) }}"
+                class="sidebar-link">
+                <span class="link-icon">📝</span>
+                <span class="link-text">Exams</span>
+            </a>
+            <a href="{{ url_for('admin.add_exams', username=username) }}" class="sidebar-link">
+                <span class="link-icon">➕</span>
+                <span class="link-text">Add Exam</span>
+            </a>
+
+            <a href="{{ url_for('admin.students', username=username) }}" class="sidebar-link">
+                <span class="link-icon">👥</span>
+                <span class="link-text">Students</span>
+            </a>
+            <a href="{{ url_for('admin.risk_analysis', username=username) }}" class="sidebar-link">
+                <span class="link-icon">⚠️</span>
+                <span class="link-text">Risk Analysis</span>
+            </a>
+            <a href="{{ url_for('admin.behavior_logs', username=username) }}" class="sidebar-link">
+                <span class="link-icon">📋</span>
+                <span class="link-text">Behavior Log</span>
+            </a>
+            <a href="{{ url_for('admin.admin_dashboard', username=username) }}" class="sidebar-link">
+                <span class="link-icon">👨‍💼</span>
+                <span class="link-text">Profile</span>
+            </a>
+            {% endblock %}
         </nav>
     </aside>
 
@@ -34,10 +65,10 @@
                 <button class="sidebar-toggle" id="sidebar-toggle">ExamPro</button>
 
                 <div class="nav-links">
-                    <a href="{{ url_for('hello') }}">Home</a>
-                    <a href="{{ url_for('features') }}">Features</a>
-                    <a href="{{ url_for('about_us') }}">About</a>
-                    <a href="#" id="logout-link">Logout</a>
+                    <a href="{{ url_for('common.hello') }}">Home</a>
+                    <a href="{{ url_for('common.features') }}">Features</a>
+                    <a href="{{ url_for('common.about_us') }}">About</a>
+                    <a href="{{ url_for('auth.logout') }}" id="logout-link">Logout</a>
                 </div>
             </div>
         </nav>
@@ -112,7 +143,7 @@
         });
 
         confirmBtn.addEventListener('click', () => {
-            window.location.href = "{{ url_for('logout') }}";
+            window.location.href = "{{ url_for('auth.logout') }}";
         });
 
         modal.addEventListener('click', (e) => {

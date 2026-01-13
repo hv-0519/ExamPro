@@ -1,0 +1,24 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block content %}
+  <form method="POST">
+    <label>Title</label>
+    <input type="text" name="title" required>
+
+    <label>Duration (minutes)</label>
+    <input type="number" name="duration_minutes" min="1" required>
+
+    <label>Total Marks</label>
+    <input type="number" name="total_marks" min="1" required>
+
+    <label>Max Attempts</label>
+    <input type="number" name="max_attempts" value="3" min="1" disabled>
+
+    <button type="submit">Create Exam</button>
+</form>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+{% endblock %}

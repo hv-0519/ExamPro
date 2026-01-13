@@ -15,7 +15,7 @@
         {% endif %}
 
         <div class="modern-form-card">
-            <form method="POST" action="{{ url_for('login') }}">
+            <form method="POST" action="{{ url_for('auth.login') }}">
                 <div class="modern-form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" placeholder="Enter username" required autofocus>
@@ -29,8 +29,8 @@
                 <button type="submit" class="modern-submit-btn">Login</button>
                 
                 <div class="modern-btn-row">
-                    <a href="{{ url_for('forgot_password') }}" class="modern-btn-secondary">Forgot Password?</a>
-                    <a href="{{ url_for('register') }}" class="modern-btn-secondary">New Here? Sign Up</a>
+                    <a href="{{ url_for('auth.forgot_password') }}" class="modern-btn-secondary">Forgot Password?</a>
+                    <a href="{{ url_for('auth.register') }}" class="modern-btn-secondary">New Here? Sign Up</a>
                 </div>
             </form>
         </div>

@@ -18,11 +18,11 @@
         <div class="nav-container">
             <div class="logo">Exam<span>Pro</span></div>
             <div class="nav-links">
-                <a href="{{ url_for('hello') }}">Home</a>
-                <a href="{{ url_for('features') }}">Features</a>
-                <a href="{{ url_for('about_us') }}">About</a>
-                <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
-                <a href="{{ url_for('register') }}" class="btn btn-register">Register</a>
+                <a href="{{ url_for('common.hello') }}">Home</a>
+                <a href="{{ url_for('common.features') }}">Features</a>
+                <a href="{{ url_for('common.about_us') }}">About</a>
+                <a href="{{ url_for('auth.login') }}" class="btn btn-login">Login</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-register">Register</a>
             </div>
         </div>
     </nav>

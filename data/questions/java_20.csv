@@ -1,0 +1,21 @@
+question_text,option_a,option_b,option_c,option_d,correct_option,wrong_answer_explanation,marks
+"Which of these is NOT a primitive data type in Java?",int,boolean,String,char,C,"String is a Class/Object in Java, not a primitive type like int or char.",1
+"What is the default value of a boolean variable in Java?",true,false,0,null,B,"In Java, the default primitive value for boolean is false.",1
+"Which keyword is used to inherit a class in Java?",extends,implements,inherits,using,A,"'extends' is used for class inheritance; 'implements' is used for interfaces.",1
+"What is the size of an int variable in Java?",16 bits,32 bits,64 bits,8 bits,B,"In Java, an int is a 32-bit signed two's complement integer.",1
+"Which method is the entry point for any Java program?",start(),init(),main(),run(),C,"The JVM looks for 'public static void main(String[] args)' to start execution.",1
+"Which operator is used to compare two values for equality?",=,==,equals,is,B,"'=' is an assignment operator; '==' is the comparison operator for primitives.",1
+"Which of these is used to handle exceptions in Java?",try-catch,throw-check,receive-handle,error-fix,A,"Java uses try-catch blocks to catch and handle runtime exceptions.",1
+"What does the 'final' keyword signify when applied to a variable?",The variable is static,The variable cannot be changed,The variable is private,The variable is an integer,B,"A final variable's value cannot be modified once assigned.",1
+"Which package is imported by default in every Java program?",java.util,java.io,java.lang,java.net,C,"java.lang contains fundamental classes like System and String.",1
+"How do you create an object in Java?",new Object(),Object.create(),Object obj = Object(),make Object,A,"The 'new' keyword is required to allocate memory for a new object instance.",1
+"Which of these is a valid declaration of a float?",float f = 1.2;,float f = 1.2f;,float f = (double)1.2;,float f = 1.2d;,B,"Floating point literals are doubles by default; you must append 'f' for float.",1
+"What is the result of 9 / 2 in integer division in Java?",4.5,4,5,4.0,B,"Integer division truncates the decimal; 9/2 equals 4.",1
+"Which collection allows unique elements only?",ArrayList,LinkedList,HashSet,Vector,C,"Set implementations like HashSet do not allow duplicate elements.",1
+"What is the parent class of all classes in Java?",Main,Base,Root,Object,D,"Every class in Java implicitly extends the java.lang.Object class.",1
+"Which keyword is used to access the parent class members?",this,parent,super,base,C,"'super' refers to the immediate parent class; 'this' refers to the current instance.",1
+"Which access modifier makes a member accessible only within the same class?",public,protected,default,private,D,"Private members are hidden from all other classes.",1
+"What is the purpose of the 'break' statement?",To stop the program,To skip an iteration,To exit a loop or switch,To start a new thread,C,"'break' terminates the innermost loop or switch statement immediately.",1
+"Which of these is used to find the length of a String?",size(),length(),getSize(),length,B,"String uses the length() method, while arrays use the .length property.",1
+"Can you have multiple main methods in a class via overloading?",Yes,No,Only in interfaces,Only in abstract classes,A,"You can overload main, but the JVM only calls the one with (String[] args).",1
+"What is 'Bytecode' in Java?",Machine code,Source code,Platform-independent code,High-level code,C,"Bytecode is the intermediate representation (.class) executed by the JVM.",1

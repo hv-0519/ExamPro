@@ -18,7 +18,7 @@
             <div class="logo">Exam<span>Pro</span></div>
             <div class="nav-links">
                 {% block student_nav_links %}
-                    <a href="{{ url_for('logout') }}">Logout</a>
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
                 {% endblock %}
             </div>
         </div>

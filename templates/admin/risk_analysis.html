@@ -3,11 +3,11 @@
 {% block title %}Risk Analysis{% endblock %}
 
 {% block admin_nav_links %}
-    <a href="{{ url_for('admin_dashboard', username=username) }}">Dashboard</a>
-    <a href="{{ url_for('admin_exams', username=username) }}">Exams</a>
-    <a href="{{ url_for('students', username=username) }}">Students</a>
-    <a href="{{ url_for('risk_analysis', username=username) }}" class="active">Risk Analysis</a>
-    <a href="{{ url_for('behavior_logs', username=username) }}">Behavior Log</a>
+    <a href="{{ url_for('admin.admin_dashboard', username=username) }}">Dashboard</a>
+    <a href="{{ url_for('admin.admin_exams', username=username) }}">Exams</a>
+    <a href="{{ url_for('admin.students', username=username) }}">Students</a>
+    <a href="{{ url_for('admin.risk_analysis', username=username) }}" class="active">Risk Analysis</a>
+    <a href="{{ url_for('admin.behavior_logs', username=username) }}">Behavior Log</a>
     <a href="#" id="logout-link">Logout</a>
 {% endblock %}
 
